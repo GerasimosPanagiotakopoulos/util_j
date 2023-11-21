@@ -57,6 +57,14 @@ class TestTimeProfiler(unittest.TestCase):
         self.assertIn("LoudTask...", self.capturedOutput.getvalue())
         self.assertIn("Finished LoudTask!", self.capturedOutput.getvalue())
 
+    def test_clear(self):
+        tp = TimeProfiler(silent_mode=False)
+        tp.new_task("Task 1")
+        tp.new_task("Task 2")
+        tp.clear()
+        self.assertListEqual(tp.all_times, [])
+        self.assertListEqual(tp.all_tasks, [])
+
 
 if __name__ == '__main__':
     unittest.main()
